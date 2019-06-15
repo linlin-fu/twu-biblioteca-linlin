@@ -50,9 +50,8 @@ public class ExampleTest {
     @Test
     public void shouldShowAllBooksInfo() {
         BookService bookService = new BookService();
-        bookService.addBook("Life", "May", LocalDate.now());
-        bookService.addBook("Thought", "Bob", LocalDate.of(1994,4,23));
-        List<String> expectAllBooks = Arrays.asList("Life  May  2019-06-15", "Thought  Bob  1994-04-23");
+        gengerateAllBooks(bookService);
+        List<String> expectAllBooks = Arrays.asList("1  Life  May  2019-06-15", "2  Thought  Bob  1994-04-23");
         assertEquals(expectAllBooks, bookService.showAllBooksInfo());
     }
 
@@ -76,6 +75,18 @@ public class ExampleTest {
         BibliotecaService bibliotecaService = new BibliotecaService();
         bibliotecaService.handleMenuSelection(2);
         assertEquals("", outContent.toString());
+    }
+
+    @Test
+    public void shouldSetCheckOut() {
+        BookService bookService = new BookService();
+        gengerateAllBooks(bookService);
+        bookService.checkOutBook(1);
+    }
+
+    private void gengerateAllBooks(BookService bookService) {
+        bookService.addBook("Life", "May", LocalDate.now());
+        bookService.addBook("Thought", "Bob", LocalDate.of(1994,4,23));
     }
 
 }
