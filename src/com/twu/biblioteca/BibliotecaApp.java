@@ -5,6 +5,9 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         BibliotecaService bibliotecaService = new BibliotecaService();
         System.out.println(bibliotecaService.welcome());
+
+        BookService bookService = new BookService();
+        bookService.showAllBooks().forEach(System.out::println);
     }
 
 }
