@@ -1,10 +1,14 @@
 package com.twu.biblioteca;
 
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import sun.util.resources.LocaleData;
 
 import javax.xml.crypto.Data;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.lang.reflect.Array;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -16,6 +20,18 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class ExampleTest {
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+
+    @Before
+    public void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
+    }
+
+    @After
+    public void restoreStreams() {
+        System.setOut(originalOut);
+    }
 
     @Test
     public void shouldReturnWelcomeMessage() {
@@ -48,6 +64,13 @@ public class ExampleTest {
         menu.addMenuList("lists of book, press 1");
         List<String> expectMenuList = Arrays.asList("lists of book, press 1");
         assertEquals(expectMenuList, menu.showMenu());
+    }
+
+    @Test
+    public void shouldPrintInvalidMessage() {
+        BibliotecaService bibliotecaService = new BibliotecaService();
+        bibliotecaService.handleMenuSelection(2);
+        assertEquals("Please select a valid Option!", outContent.toString());
     }
 
 }

@@ -6,14 +6,15 @@ import java.util.Scanner;
 public class BibliotecaApp {
 
     public static void main(String[] args) {
-        showWeclome();
 
-        showMenuList();
+        BibliotecaService bibliotecaService = new BibliotecaService();
+        System.out.println(bibliotecaService.welcome());
+
+        bibliotecaService.showMenuList().forEach(System.out::println);
 
         Integer select = getSelection();
 
-        handleMenuSelection(select);
-
+        bibliotecaService.handleMenuSelection(select);
 
     }
 
@@ -27,38 +28,4 @@ public class BibliotecaApp {
         }
         return select;
     }
-
-    private static void handleMenuSelection(Integer select) {
-        switch (select) {
-            case 1:
-                showBookList();
-                break;
-            case 2:
-                break;
-            default:
-                System.out.println("invalid selection");
-
-        }
-    }
-
-    private static void showBookList() {
-        BookService bookService = new BookService();
-        bookService.addBook("Life", "May", LocalDate.now());
-        bookService.addBook("Thought", "Bob", LocalDate.of(1994,4,23));
-//        bookService.showAllBooks().forEach(System.out::println);
-        bookService.showAllBooksInfo().forEach(System.out::println);
-    }
-
-    private static void showMenuList() {
-        Menu menu = new Menu();
-        System.out.println("Please select");
-        menu.addMenuList("lists of book, press 1");
-        menu.showMenu().forEach(System.out::println);
-    }
-
-    private static void showWeclome() {
-        BibliotecaService bibliotecaService = new BibliotecaService();
-        System.out.println(bibliotecaService.welcome());
-    }
-
 }
