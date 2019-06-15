@@ -84,6 +84,20 @@ public class ExampleTest {
         bookService.checkOutBook(1);
     }
 
+    @Test
+    public void shouldReturnSucceedMessageWhenCheckOutSucceed() {
+        BookService bookService = new BookService();
+        gengerateAllBooks(bookService);
+        assertEquals("Thank you! Enjoy the book", bookService.checkOutBook(1));
+    }
+
+    @Test
+    public void shouldReturnFailedMessageWhenCheckOutFailed() {
+        BookService bookService = new BookService();
+        gengerateAllBooks(bookService);
+        assertEquals("Sorry, that book is not available", bookService.checkOutBook(3));
+    }
+
     private void gengerateAllBooks(BookService bookService) {
         bookService.addBook("Life", "May", LocalDate.now());
         bookService.addBook("Thought", "Bob", LocalDate.of(1994,4,23));

@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class BibliotecaService {
 
+    BookService bookService = new BookService();
+
     public String  welcome() {
         String welcomeMessage = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore";
         return welcomeMessage;
@@ -16,6 +18,7 @@ public class BibliotecaService {
         System.out.println("Please select");
         menu.addMenuList("lists of book, press 1");
         menu.addMenuList("quit, press 2");
+        menu.addMenuList("check out book press 3");
         return menu.showMenu();
     }
 
@@ -26,6 +29,9 @@ public class BibliotecaService {
                 getSelection();
             case 2:
                 break;
+            case 3:
+                System.out.println(checkoutBook());
+                getSelection();
             default:
                 System.out.println(showNoitified());
                 getSelection();
@@ -33,8 +39,15 @@ public class BibliotecaService {
         }
     }
 
+    private String checkoutBook() {
+
+        showBookList();
+        Integer id = getSelection();
+        String response = bookService.checkOutBook(id);
+        return response;
+    }
+
     public void showBookList() {
-        BookService bookService = new BookService();
         bookService.addBook("Life", "May", LocalDate.now());
         bookService.addBook("Thought", "Bob", LocalDate.of(1994,4,23));
 //        bookService.showAllBooks().forEach(System.out::println);
