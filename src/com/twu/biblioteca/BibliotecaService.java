@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Scanner;
 
 public class BibliotecaService {
 
@@ -14,6 +15,7 @@ public class BibliotecaService {
         Menu menu = new Menu();
         System.out.println("Please select");
         menu.addMenuList("lists of book, press 1");
+        menu.addMenuList("quit, press 2");
         return menu.showMenu();
     }
 
@@ -21,8 +23,12 @@ public class BibliotecaService {
         switch (select) {
             case 1:
                 showBookList();
+                getSelection();
+            case 2:
+                break;
             default:
-                showNoitified();
+                System.out.println(showNoitified());
+                getSelection();
 
         }
     }
@@ -35,7 +41,21 @@ public class BibliotecaService {
         bookService.showAllBooksInfo().forEach(System.out::println);
     }
 
-    public void showNoitified() {
-        System.out.print("Please select a valid Option!");
+    public String showNoitified() {
+        return "Please select a valid Option!";
     }
+
+    public Integer getSelection() {
+        while (true) {
+            Integer select = 0;
+            try {
+                Scanner scanner = new Scanner(System.in);
+                select = scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println("Input error");
+            }
+            return select;
+        }
+    }
+
 }

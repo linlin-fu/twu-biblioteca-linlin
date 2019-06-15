@@ -4,20 +4,18 @@ package com.twu.biblioteca;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import sun.util.resources.LocaleData;
 
-import javax.xml.crypto.Data;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.lang.reflect.Array;
-import java.time.Instant;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
+
 import java.util.Arrays;
-import java.util.Date;
+
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+
 
 public class ExampleTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -69,8 +67,15 @@ public class ExampleTest {
     @Test
     public void shouldPrintInvalidMessage() {
         BibliotecaService bibliotecaService = new BibliotecaService();
+        String message = bibliotecaService.showNoitified();
+        assertEquals("Please select a valid Option!", message);
+    }
+
+    @Test
+    public void shouldQuit() {
+        BibliotecaService bibliotecaService = new BibliotecaService();
         bibliotecaService.handleMenuSelection(2);
-        assertEquals("Please select a valid Option!", outContent.toString());
+        assertEquals("", outContent.toString());
     }
 
 }
