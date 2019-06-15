@@ -13,7 +13,9 @@ public class BookService {
     private List<Book> allBooks = new ArrayList<Book>();
     Integer idNumber = 0;
     static String succeed = "Thank you! Enjoy the book";
+    static String succeedReturn = "Thank you for returning the book";
     static String failed = "Sorry, that book is not available";
+    static String failedReturn = "That is not a valid to return";
 
 
     public void addBook(String name, String author, LocalDate publicationYear) {
@@ -42,11 +44,25 @@ public class BookService {
         List<Book> findBook =  getBookById(this.allBooks, id);
         if (findBook.size() >= 1) {
             Book book = allBooks.get(0);
-            book.setIsCheckout(true);
-            return succeed;
-        } else {
-            return failed;
+            if (book.getIsCheckOut() == false) {
+                book.setIsCheckout(true);
+                return succeed;
+            }
         }
+        return failed;
+
+    }
+
+    public String returnBook(Integer id) {
+        List<Book> findBook =  getBookById(this.allBooks, id);
+        if (findBook.size() >= 1) {
+            Book book = allBooks.get(0);
+            if (book.getIsCheckOut() == true) {
+                book.setIsCheckout(false);
+                return succeedReturn;
+            }
+        }
+        return failedReturn;
 
     }
 

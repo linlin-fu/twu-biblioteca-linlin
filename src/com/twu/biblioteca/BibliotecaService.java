@@ -18,7 +18,8 @@ public class BibliotecaService {
         System.out.println("Please select");
         menu.addMenuList("lists of book, press 1");
         menu.addMenuList("quit, press 2");
-        menu.addMenuList("check out book press 3");
+        menu.addMenuList("check out book, press 3");
+        menu.addMenuList("Return book, press 4");
         return menu.showMenu();
     }
 
@@ -32,6 +33,8 @@ public class BibliotecaService {
             case 3:
                 System.out.println(checkoutBook());
                 getSelection();
+            case 4:
+                System.out.println(returnBook());
             default:
                 System.out.println(showNoitified());
                 getSelection();
@@ -42,6 +45,12 @@ public class BibliotecaService {
     private String checkoutBook() {
 
         showBookList();
+        Integer id = getSelection();
+        String response = bookService.checkOutBook(id);
+        return response;
+    }
+
+    private String returnBook() {
         Integer id = getSelection();
         String response = bookService.checkOutBook(id);
         return response;

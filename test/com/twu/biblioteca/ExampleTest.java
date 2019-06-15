@@ -98,6 +98,20 @@ public class ExampleTest {
         assertEquals("Sorry, that book is not available", bookService.checkOutBook(3));
     }
 
+    @Test
+    public void shouldReturnSucceedMessageWhenReturnSucceed() {
+        BookService bookService = new BookService();
+        gengerateAllBooks(bookService);
+        bookService.checkOutBook(1);
+        assertEquals("Thank you for returning the book", bookService.returnBook(1));
+    }
+
+    @Test
+    public void shouldReturnFailedMessageWhenReturnFailed() {
+        BookService bookService = new BookService();
+        gengerateAllBooks(bookService);
+        assertEquals("That is not a valid to return", bookService.returnBook(3));
+    }
     private void gengerateAllBooks(BookService bookService) {
         bookService.addBook("Life", "May", LocalDate.now());
         bookService.addBook("Thought", "Bob", LocalDate.of(1994,4,23));
