@@ -42,4 +42,12 @@ public class ExampleTest {
         assertEquals(expectAllBooks, bookService.showAllBooksInfo());
     }
 
+    @Test
+    public void shouldShowMenuList() {
+        Menu menu = new Menu();
+        menu.addMenuList("lists of book, press 1");
+        List<String> expectMenuList = Arrays.asList("lists of book, press 1");
+        assertEquals(expectMenuList, menu.showMenu());
+    }
+
 }
