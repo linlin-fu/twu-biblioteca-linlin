@@ -4,7 +4,7 @@ public class BibliotecaApp {
 
     public static void main(String[] args) {
         BibliotecaService bibliotecaService = new BibliotecaService();
-        bibliotecaService.welcome();
+        System.out.println(bibliotecaService.welcome());
     }
 
 }
