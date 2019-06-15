@@ -1,19 +1,19 @@
 package com.twu.biblioteca;
 
-import sun.util.resources.LocaleData;
+import java.time.LocalDate;
 
 public class Book {
 
     private String name;
     private String author;
-    private LocaleData publicationYear;
+    private LocalDate publicationYear;
     private Boolean isCheckout = false;
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setBookInfo(String author, LocaleData publicationYear) {
+    public void setBookInfo(String author, LocalDate publicationYear) {
         this.author = author;
         this.publicationYear = publicationYear;
     }
@@ -24,6 +24,10 @@ public class Book {
 
     public String getName () {
         return name;
+    }
+
+    public String getInfo() {
+        return this.name +  "  "  + this.author + "  " + this.publicationYear;
     }
 
 
